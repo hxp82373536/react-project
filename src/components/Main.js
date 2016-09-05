@@ -3,7 +3,6 @@ require('styles/App.scss');
 
 import React from 'react';
 
-let yeomanImage = require('../images/yeoman.png');
 
 var imageDatas = require('../data/imageDatas.json');
 
@@ -18,14 +17,17 @@ imageDatas = ((imageDatasArr) => {
   return imageDatasArr;
 })(imageDatas);
 
-class AppComponent extends React.Component {
+
+//单个图片组件
+class ImgFigure extends React.Component {
   render() {
     return (
-      <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <span>hello</span>
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
-      </div>
+      <figure className="img-figure">
+        <img src={this.props.data.imageURL} alt={this.props.data.title}/>
+        <figcaption>
+          <h2 className="img-title">{this.props.data.title}</h2>       
+        </figcaption>
+      </figure>
     );
   }
 }
@@ -33,6 +35,11 @@ class AppComponent extends React.Component {
 
 class GalleryByReactApp extends React.Component {
   render() {
+    var controllerUnits = [],
+      imgFigures = [];
+    imageDatas.forEach((value, index) => {
+      imgFigures.push(<ImgFigure data={value} key={index}/>);
+    });
     return (
       <section className="stage" ref="stage">
         <section className="img-sec">
@@ -46,7 +53,7 @@ class GalleryByReactApp extends React.Component {
   }
 }
 
-AppComponent.defaultProps = {
-};
 
-export default AppComponent;
+GalleryByReactApp.defaultProps = {};
+
+export default GalleryByReactApp;
