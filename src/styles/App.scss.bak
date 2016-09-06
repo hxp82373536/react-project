@@ -27,7 +27,7 @@ html,body {
   background-color: #ddd;
    @at-root {
     .img-figure {
-      @include abpos;
+     
       width: 320px;
       height: 360px;
       margin: 0;
